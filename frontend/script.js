@@ -87,11 +87,10 @@ function cargarLE(resultado){
   let transformado = JSON.parse(resultado);
   var salida="";
   var elemento="";
-  elemento = "ID: " + transformado.id;
-  elemento = elemento + "<br>Documento de identidad: " + transformado.dni;
-  elemento = elemento + "<br>Nombres: " + transformado.nombre;
-  salida = salida  + elemento + "<br><br>";
-  document.getElementById("rtaLE").innerHTML = salida;
+  elemento = elemento + "<br>Documento de identidad: " + transformado.numerodedocumentodelestudiante;
+  elemento = elemento + "<br>Nombres: " + transformado.nombrescompletosdelestudiante;
+  salida += elemento + "<br><br>";
+  document.getElementById("rta").innerHTML = salida;
 }
 
 function listar_estudiante(){
@@ -104,8 +103,8 @@ function listar_estudiante(){
     headers: myHeaders,
     redirect: "follow"
   };
-  let elid = document.getElementById("idLE").value;
-  fetch("http://localhost:8888/.netlify/functions/estudiantes"+elid, requestOptions)
+  let dni = document.getElementById("dni").value;
+  fetch(`http://localhost:8888/.netlify/functions/estudiantes/${dni}`, requestOptions)
     .then((response) =>
       response.text())
     .then((result) =>

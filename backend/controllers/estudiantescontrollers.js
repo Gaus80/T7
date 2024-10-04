@@ -66,11 +66,11 @@ class EstudiantesController{
     }
 
     consultarDetalle(req,res){
-        const {id} = req.params;
+        const {numerodedocumentodelestudiante} = req.params;
         try{
 
-            db.query('SELECT  * FROM estudiantes WHERE id=?',
-            [id],(err,rows) => {
+            db.query('SELECT  * FROM estudiantes WHERE numerodedocumentodelestudiante=?',
+            [numerodedocumentodelestudiante],(err,rows) => {
                 if(err) {
                     res.status (400).send(err.message);
                 }
