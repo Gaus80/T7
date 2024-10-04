@@ -41,7 +41,7 @@ function listar(){
     method: "GET",
     redirect: "follow"
   };
-  fetch("http://localhost:8888/.netlify/functions/estudiantes/estudiantes", requestOptions)
+  fetch("http://localhost:8888/estudiantes", requestOptions)
     .then((response) =>
       response.text())
     .then((result) =>
@@ -72,7 +72,7 @@ function actualizar(){
     redirect: "follow"
   };
   let elid=document.getElementById("idA").value;
-  fetch("http://localhost:8888/.netlify/functions/estudiantes"+elid, requestOptions)
+  fetch("http://localhost:8888/estudiantes/.netlify/functions/estudiantes"+elid, requestOptions)
     .then((response) =>
           response.text())
     .then((result) =>
