@@ -2,7 +2,7 @@ const db= require("../bd/conexion.js");
 
 
 class EstudiantesController{
-    construct(){
+    constructor(){
 
     }
 
