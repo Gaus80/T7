@@ -150,8 +150,8 @@ function guardarSesiones(){
   let rawCursos = JSON.stringify({
     "sesionesCurso": document.getElementById("sesionesCurso").value,
     "fecha": document.getElementById("fecha").value,
-    "horaInicio": document.getElementById("horaInicio"),
-    "horaFinal": document.getElementById("horaFinal"),
+    "horaInicio": document.getElementById("horaInicio").value,
+    "horaFinal": document.getElementById("horaFinal").value,
   });
 
   let requestOptions = {
