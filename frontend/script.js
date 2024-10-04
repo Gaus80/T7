@@ -151,7 +151,7 @@ function guardarSesiones(){
     "sesionesCurso": document.getElementById("sesionesCurso").value,
     "fecha": document.getElementById("fecha").value,
     "horaInicio": document.getElementById("horaInicio"),
-    "horaFinal": document.getElementById("horaFinal")
+    "horaFinal": document.getElementById("horaFinal"),
   });
 
   let requestOptions = {
@@ -168,7 +168,7 @@ function guardarSesiones(){
 }
 // CONSULTAR CURSOS
 
-function cargarCurso  (resultado){
+function cargarCurso(resultado){
   let transformado = JSON.parse(resultado);
   var salida="";
   var elemento="";
@@ -191,7 +191,7 @@ function listarCurso(){
     method: "GET",
     redirect: "follow"
   };
-  fetch("http://localhost:8888/.netlify/functions/cursos", requestOptions)
+  fetch("http://localhost:8888/.netlify/functions/sesiones", requestOptions)
     .then((response) =>
       response.text())
     .then((result) =>

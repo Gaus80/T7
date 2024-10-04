@@ -1,7 +1,7 @@
 const db= require("../bd/conexion.js");
 
 
-class CursosController{
+class SesionesController{
     constructor(){
 
     }
@@ -26,11 +26,11 @@ ingresar(req,res){
         const myJSON = JSON.stringify(req.body);
         console.log ("la información que llega es " + myJSON );
 
-        const {codigoCurso,nombreCurso} = req.body;
+        const {codigoCurso,nombreCurso, fecha,horaInicio, horaFinal} = req.body;
         //console.log ("el dni que llega es de " + dni);
 
-        db.query('INSERT INTO sesiones (numerodesecuencia,codigodelcurso ,fecha,horadeinicio,horafinal) VALUES (?, ?, ?, ?, ?);',
-        [codigoCurso,nombreCurso],(err,rows) => {
+        db.query('INSERT INTO sesiones (codigodelcurso,fecha,horadeinicio,horafinal) VALUES (?, ?, ?, ?);',
+        [codigoCurso,nombreCurso, fecha, horaInicio,horaFinal],(err,rows) => {
             if(err) {
                 res.status (400).send(err.message);
             }else{
@@ -46,4 +46,4 @@ ingresar(req,res){
 
 }
 
-module.exports = new CursosController();
+module.exports = new SesionesController();
