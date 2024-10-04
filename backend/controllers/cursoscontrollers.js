@@ -86,25 +86,30 @@ class CursosController{
 
 
 
-
-    consultarDetalle(req,res){
-        const {numerodedocumentodelestudiante} = req.params;
-        try{
-
-            db.query('SELECT  * FROM estudiantes WHERE numerodedocumentodelestudiante=?',
-            [numerodedocumentodelestudiante],(err,rows) => {
-                if(err) {
-                    res.status (400).send(err.message);
-                }
-                res.status(200).json(rows[0]);
-            });
-        }catch (err){
-            res.status(500).send(err.message);
-        }
-
+   consultarDetallecursos(req, res) {
+    const { codigodelcurso } = req.params;  // Extraer el código del curso desde los parámetros
+    try {
+        db.query('SELECT * FROM cursos WHERE codigodelcurso = ?', [codigodelcurso], (err, rows) => {
+            if (err) {
+                return res.status(400).send({ error: err.message });
+            }
+            if (rows.length === 0) {
+                // Si no hay cursos encontrados, enviar un mensaje de error adecuado
+                return res.status(404).json({ mensaje: 'No se encontró el curso con ese código' });
+            }
+            // Si el curso fue encontrado, devolverlo
+            return res.status(200).json(rows[0]);
+        });
+    } catch (err) {
+        // Capturar errores inesperados del servidor
+        return res.status(500).send({ error: err.message });
     }
+}
+
+
 
 }
+
 
     
 

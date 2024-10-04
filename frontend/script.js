@@ -259,7 +259,58 @@ function eliminarCurso(){
       console.error(error));
 }
 
+//BUSCAR UNICAMENTE ESE ESTUDIANTE
+// Buscar un curso específico
+function cargarLECursos(resultado) {
+  let transformado = JSON.parse(resultado);
+  let salida = "";
+  let elemento = "";
+  
+  // Revisa si transformado no está vacío para evitar errores si no hay resultados
+  if (transformado) {
+    elemento += "<br>Codigo del curso: " + transformado.codigodelcurso;
+    elemento += "<br>Nombre del curso: " + transformado.nombredelcurso;
+    salida += elemento + "<br><br>";
+  } else {
+    salida = "No se encontró el curso con ese código.";
+  }
+  
+  document.getElementById("curso-rta").innerHTML = salida;
+}
 
+function listar_curso(event) {
+  event.preventDefault();
+  
+  const myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+  
+  let codigoCurso = document.getElementById("codigoCurso").value; // Obtén el código ingresado
+  
+  const requestOptions = {
+    method: "GET",
+    headers: myHeaders,
+    redirect: "follow"
+  };
+  
+  // Cambiar la URL para incluir el código del curso correctamente en la ruta
+  fetch(`http://localhost:8888/.netlify/functions/cursos/${codigoCurso}`, requestOptions)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error('Error al obtener el curso');
+      }
+      return response.text();
+    })
+    .then((result) => cargarLECursos(result)) // Llamar a la función que carga el resultado
+    .catch((error) => {
+      console.error(error);
+      document.getElementById("curso-rta").innerHTML = "Error: " + error.message;
+    });
+}
+
+
+
+
+//----------------------------------------------------------------------------------------------------------------
 //GUARDAR SESIONES
 
 function guardarSesiones(){

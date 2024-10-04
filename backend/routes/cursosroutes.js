@@ -6,7 +6,7 @@ router.get("/",cursoscontrollers.consultar);
 router.post("/",cursoscontrollers.ingresar);
 
 router.route("/:codigodelcurso")
-.get(cursoscontrollers.consultarDetalle)
+.get(cursoscontrollers.consultarDetallecursos)
 .put(cursoscontrollers.actualizar)
 .delete(cursoscontrollers.borrar);
 
