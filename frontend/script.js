@@ -27,9 +27,8 @@ function cargar(resultado){
   var elemento="";
 
   for (let vc in transformado){
-      elemento = "ID: " + transformado[vc].id;
-      elemento = elemento + "<br>Documento de identidad: " + transformado[vc].dni;
-      elemento = elemento + "<br>Nombres: " + transformado[vc].nombre;
+      elemento = elemento + "<br>Documento de identidad: " + transformado[vc].numerodedocumentodelestudiante;
+      elemento = elemento + "<br>Nombres: " + transformado[vc].nombrescompletosdelestudiante;
       salida = salida  + elemento + "<br><br>";
   }
   document.getElementById("rta").innerHTML = salida;
@@ -52,7 +51,7 @@ function listar(){
 }
 
 function respuesta_actualizar(resultado){
-  document.getElementById("rtaA").innerHTML = resultado;
+  document.getElementById("rta").innerHTML = resultado;
 }
 
 function actualizar(){
@@ -71,8 +70,8 @@ function actualizar(){
     body: raw,
     redirect: "follow"
   };
-  let elid=document.getElementById("dni").value;
-  fetch("http://localhost:8888/.netlify/functions/estudiantes"+elid, requestOptions)
+  let id = document.getElementById("dni").value;
+  fetch("http://localhost:8888/.netlify/functions/estudiantes"  , requestOptions)
     .then((response) =>
           response.text())
     .then((result) =>
