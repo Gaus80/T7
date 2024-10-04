@@ -10,8 +10,10 @@ db.connect((err)=> {
     if (err) {
         console.log("Conexion no Establecida")
         throw err;
+    }else{
+        console.log ("BD Mysql Conectado");
     }
-    console.log ("BD Mysql Conectado");
+  
 });
 
 module.exports = db;

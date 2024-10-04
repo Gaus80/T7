@@ -15,7 +15,7 @@ function guardar(){
       redirect: "follow"
     };
 
-    fetch("http://localhost:8888/.netlify/functions/estudiantes", requestOptions)
+    fetch("http://localhost:8888/.netlify/functions/estudiantes/", requestOptions)
       .then((response) => response.text())
       .then((result) => console.log(result))
       .catch((error) => console.error(error));
@@ -43,7 +43,7 @@ function listar(){
       method: "GET",
       redirect: "follow"
     };
-    fetch("http://localhost:6500/estudiantes/", requestOptions)
+    fetch("http://localhost:8888/.netlify/functions/estudiantes/", requestOptions)
       .then((response) =>
         response.text())
       .then((result) =>
@@ -74,7 +74,7 @@ function actualizar(){
       redirect: "follow"
     };
     let elid=document.getElementById("idA").value;
-    fetch("http://localhost:8888/api/estudiantes/"+elid, requestOptions)
+    fetch("http://localhost:8888/.netlify/functions/estudiantes"+elid, requestOptions)
       .then((response) =>
             response.text())
       .then((result) =>
@@ -105,7 +105,7 @@ function listar_estudiante(){
       redirect: "follow"
     };
     let elid=document.getElementById("idLE").value;
-    fetch("http://localhost:6500/estudiantes/"+elid, requestOptions)
+    fetch("http://localhost:8888/.netlify/functions/estudiantes"+elid, requestOptions)
       .then((response) =>
         response.text())
       .then((result) =>
@@ -130,7 +130,7 @@ function eliminar_estudiante(){
       redirect: "follow"
     };
     let elid=document.getElementById("idEE").value;
-    fetch("http://localhost:6500/estudiantes/"+elid, requestOptions)
+    fetch("http://localhost:8888/.netlify/functions/estudiantes"+elid, requestOptions)
       .then((response) =>
         response.text())
       .then((result) =>
