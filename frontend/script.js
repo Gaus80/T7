@@ -27,9 +27,13 @@ function cargar(resultado){
   var elemento="";
 
   for (let vc in transformado){
+
+    //RESETEAR ELEMENTO
+    elemento = "";
+
       elemento = elemento + "<br>Documento de identidad: " + transformado[vc].numerodedocumentodelestudiante;
       elemento = elemento + "<br>Nombres: " + transformado[vc].nombrescompletosdelestudiante;
-      salida = salida  + elemento + "<br><br>";
+      salida += elemento + "<br><br>";
   }
   document.getElementById("rta").innerHTML = salida;
 }
@@ -59,8 +63,7 @@ function actualizar(){
   myHeaders.append("Content-Type", "application/json");
   event.preventDefault();
 
-  let raw = JSON.stringify({
-    "dni": document.getElementById("dni").value,
+  let raw = JSON.stringify({  
     "nombre": document.getElementById("nombre").value,
   });
 
@@ -70,8 +73,8 @@ function actualizar(){
     body: raw,
     redirect: "follow"
   };
-  let id = document.getElementById("dni").value;
-  fetch("http://localhost:8888/.netlify/functions/estudiantes"  , requestOptions)
+  let dni = document.getElementById("dni").value;
+  fetch(`http://localhost:8888/.netlify/functions/estudiantes/${dni}`, requestOptions)
     .then((response) =>
           response.text())
     .then((result) =>

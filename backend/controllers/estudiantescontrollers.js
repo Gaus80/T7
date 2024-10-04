@@ -20,24 +20,29 @@ class EstudiantesController{
         }
     }
 
-    actualizar(req,res){
-        const {id} = req.params;
-        try{
-            const {dni,nombre} = req.body;
-            db.query('UPDATE sistema_asistencia.estudiantes SET numerodedocumentodelestudiante=?, nombrescompletosdelestudiante=?, WHERE id=?;',
-            [numerodedocumentodelestudiante,nombrescompletosdelestudiante],(err,rows) => {
-                if(err) {
-                    res.status (400).send(err.message);
+    actualizar(req, res) {
+        const { numerodedocumentodelestudiante } = req.params;  // Get dni from URL
+        try {
+            const { nombre } = req.body;  // Get new name from request body
+            db.query(
+                'UPDATE sistema_asistencia.estudiantes SET nombrescompletosdelestudiante=? WHERE numerodedocumentodelestudiante=?',
+                [nombre, numerodedocumentodelestudiante],  // Update the name where dni matches
+                (err, rows) => {
+                    if (err) {
+                        res.status(400).send(err.message);z
+                        return;
+                    }
+                    if (rows.affectedRows == 1) {
+                        res.status(200).json({ respuesta: "Registro actualizado correctamente" });
+                    } else {
+                        res.status(404).json({ respuesta: "Estudiante no encontrado" });
+                    }
                 }
-                if (rows.affectedRows == 1)
-                    res.status(200).json({respuesta:"Registro actualizado correctamente"});
-            });
-        }catch (err){
-            //console.log(err);
+            );
+        } catch (err) {
             res.status(500).send(err.message);
         }
     }
-
     ingresar(req,res){
         try{
             const myJSON = JSON.stringify(req.body);
