@@ -266,7 +266,6 @@ function cargarLECursos(resultado) {
   let salida = "";
   let elemento = "";
   
-  // Revisa si transformado no está vacío para evitar errores si no hay resultados
   if (transformado) {
     elemento += "<br>Codigo del curso: " + transformado.codigodelcurso;
     elemento += "<br>Nombre del curso: " + transformado.nombredelcurso;
@@ -349,10 +348,12 @@ function cargarSesion(resultado){
     elemento = "";
 
       elemento += "<br>Codigo Curso: " + transformado[vc].codigodelcurso;
-      elemento += "<br>Nombre del Curso: " + transformado[vc].nombredelcurso;
+      elemento += "<br>Nombre del Curso: " + transformado[vc].fecha;
+      elemento += "<br>Nombre del Curso: " + transformado[vc].horadeinicio;
+      elemento += "<br>Nombre del Curso: " + transformado[vc].horafinal;
       salida += elemento + "<br><br>";
   }
-  document.getElementById("curso-rta").innerHTML = salida;
+  document.getElementById("sesion-rta").innerHTML = salida;
 }
 
 function listarSesion(){
@@ -365,7 +366,7 @@ function listarSesion(){
     .then((response) =>
       response.text())
     .then((result) =>
-      cargarCurso(result))
+      cargarSesion(result))
     .catch((error) =>
       console.error(error));
 
