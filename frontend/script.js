@@ -139,7 +139,28 @@ function eliminar_estudiante(){
 }
 
 //METODOS PARA CURSOS
+function guardarCurso(){
+  const myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+  event.preventDefault();
 
+  let rawCursos = JSON.stringify({
+    "codigoCurso": document.getElementById("codigoCurso").value,
+    "nombreCurso": document.getElementById("nombreCurso").value,
+  });
+
+  let requestOptions = {
+    method: "POST",
+    headers: myHeaders,
+    body: rawCursos,
+    redirect: "follow"
+  };
+
+  fetch("http://localhost:8888/.netlify/functions/cursos", requestOptions)
+    .then((response) => response.text())
+    .then((result) => console.log(result))
+    .catch((error) => console.error(error));
+}
 //GUARDAR SESIONES
 
 function guardarSesiones(){
