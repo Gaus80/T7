@@ -5,8 +5,11 @@ const serverless = require('serverless-http');
 const app = express();
 const estudiantesroutes = require("./backend/routes/estudiantesroutes.js");
 
+const PORT = process.env.PORT || 5000;
+
 app.use(express.json());
 app.use(cors());
+
 
 app.get("/", (req, res) => {
     res.send("Hola mundo");
@@ -14,9 +17,6 @@ app.get("/", (req, res) => {
 
 app.use("/estudiantes", estudiantesroutes);
 
-    const port = process.env.PORT || 6500;
-    app.listen(port, () => {
-        console.log(`Servidor activo en el puerto ${port}`);
-
-}   )
- // Exporta el manejador para Netlify
+app.listen(6500, () =>{
+    console.log("Server listening on port http://localhost:6500")
+})

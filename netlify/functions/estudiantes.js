@@ -1,7 +1,6 @@
 const express = require('express');
 const cors = require('cors');
 const serverless = require('serverless-http')
-const PORT = process.env.PORT || 6500
 const app = express();
 const estudiantesroutes = require("../../backend/routes/estudiantesroutes.js");
 
