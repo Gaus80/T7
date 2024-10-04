@@ -6,8 +6,8 @@ router.get("/",sesionescontrollers.consultar);
 router.post("/",sesionescontrollers.ingresar);
 
 // router.route("/:codigodelcurso")
-// .get(estudiantescontroller.consultarDetalle)
-// .put(estudiantescontroller.actualizar)
-// .delete(estudiantescontroller.borrar);
+// .get(sesionescontrollers.consultarDetalle)
+// .put(sesionescontrollers.actualizar)
+// .delete(sesionescontrollers.borrar);
 
 module.exports = router;

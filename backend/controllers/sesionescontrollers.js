@@ -43,6 +43,66 @@ ingresar(req,res){
     }
 }
 
+actualizar(req, res) {
+    const { codigoCurso } = req.params;  // Get codigoCurso from URL
+    try {
+        const { fecha, horaInicio, horaFinal } = req.body;  // Get body parameters
+        db.query(
+            'UPDATE sistema_asistencia.sesiones SET codigodelcurso=?, fecha=?, horadeinicio=?, horafinal=? WHERE codigodelcurso=?',
+            [codigoCurso, fecha, horaInicio, horaFinal, codigoCurso],  // Pass codigoCurso again for the WHERE clause
+            (err, rows) => {
+                if (err) {
+                    res.status(400).send(err.message);
+                    return;
+                }
+                if (rows.affectedRows == 1) {
+                    res.status(200).json({ respuesta: "Registro actualizado correctamente" });
+                } else {
+                    res.status(404).json({ respuesta: "Sesion no encontrado" });
+                }
+            }
+        );
+    } catch (err) {
+        res.status(500).send(err.message);
+    }
+}
+
+
+consultarDetalle(req,res){
+    const {numerodedocumentodelestudiante} = req.params;
+    try{
+
+        db.query('SELECT  * FROM estudiantes WHERE numerodedocumentodelestudiante=?',
+        [numerodedocumentodelestudiante],(err,rows) => {
+            if(err) {
+                res.status (400).send(err.message);
+            }
+            res.status(200).json(rows[0]);
+        });
+    }catch (err){
+        res.status(500).send(err.message);
+    }
+
+}
+
+borrar(req,res){
+    const {numerodedocumentodelestudiante} = req.params;
+    try{
+        req.body;
+        db.query('DELETE FROM sistema_asistencia.estudiantes WHERE numerodedocumentodelestudiante=?;',
+        [numerodedocumentodelestudiante],(err,rows) => {
+            if(err) {
+                res.status (400).send(err.message);
+            }
+            if (rows.affectedRows == 1)
+                res.status(200).json({respuesta:"Registro borrado correctamente"});
+        });
+    }catch (err){
+        res.status(500).send(err.message);
+    }
+}
+}
+
 
 }
 

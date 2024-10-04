@@ -372,3 +372,35 @@ function listarSesion(){
 
 }
 
+//ACTUALIZAR SESIONES
+
+function respuestaSesion(resultado){
+  document.getElementById("sesion-rta").innerHTML = resultado;
+}
+
+function actualizarSesion(event){  // Add event parameter here
+  event.preventDefault();  // Prevent form submission
+
+  const myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+
+  let raw = JSON.stringify({  
+    "sesionesCurso": document.getElementById("sesionesCurso").value,
+    "fecha": document.getElementById("fecha").value,
+    "horaInicio": document.getElementById("horaInicio").value,
+    "horaFinal": document.getElementById("horaFinal").value,
+  });
+
+  let requestOptions = {  
+    method: "PUT",
+    headers: myHeaders,
+    body: raw,
+    redirect: "follow"
+  };
+
+  let codigo = document.getElementById("sesionesCurso").value;
+  fetch(`http://localhost:8888/.netlify/functions/sesiones/${codigo}`, requestOptions)
+    .then((response) => response.text())
+    .then((result) => respuestaActualizarSesion(result))  // Corrected function name
+    .catch((error) => console.error(error));
+}
