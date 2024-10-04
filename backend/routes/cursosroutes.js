@@ -5,9 +5,9 @@ const cursoscontrollers = require("../controllers/cursoscontrollers.js");
 router.get("/",cursoscontrollers.consultar);
 router.post("/",cursoscontrollers.ingresar);
 
-// router.route("/:codigodelcurso")
-// .get(estudiantescontroller.consultarDetalle)
-// .put(estudiantescontroller.actualizar)
-// .delete(estudiantescontroller.borrar);
+router.route("/:codigodelcurso")
+.get(cursoscontrollers.consultarDetalle)
+.put(cursoscontrollers.actualizar)
+.delete(cursoscontrollers.borrar);
 
 module.exports = router;
