@@ -83,11 +83,11 @@ class EstudiantesController{
     }
 
     borrar(req,res){
-        const {id} = req.params;
+        const {numerodedocumentodelestudiante} = req.params;
         try{
             req.body;
-            db.query('DELETE FROM sistema_asistencia.estudiantes WHERE id=?;',
-            [id],(err,rows) => {
+            db.query('DELETE FROM sistema_asistencia.estudiantes WHERE numerodedocumentodelestudiante=?;',
+            [numerodedocumentodelestudiante],(err,rows) => {
                 if(err) {
                     res.status (400).send(err.message);
                 }

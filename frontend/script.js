@@ -104,7 +104,7 @@ function listar_estudiante(){
     headers: myHeaders,
     redirect: "follow"
   };
-  let elid=document.getElementById("idLE").value;
+  let elid = document.getElementById("idLE").value;
   fetch("http://localhost:8888/.netlify/functions/estudiantes"+elid, requestOptions)
     .then((response) =>
       response.text())
@@ -116,7 +116,7 @@ function listar_estudiante(){
 
 function cargarEE(resultado){
   let transformado = JSON.parse(resultado);
-  document.getElementById("rtaEE").innerHTML = transformado.respuesta;
+  document.getElementById("rta").innerHTML = transformado.respuesta;
 }
 
 function eliminar_estudiante(){
@@ -129,8 +129,8 @@ function eliminar_estudiante(){
     headers: myHeaders,
     redirect: "follow"
   };
-  let elid=document.getElementById("idEE").value;
-  fetch("http://localhost:8888/.netlify/functions/estudiantes"+elid, requestOptions)
+  let dni = document.getElementById("dni").value;
+  fetch(`http://localhost:8888/.netlify/functions/estudiantes/${dni}`, requestOptions)
     .then((response) =>
       response.text())
     .then((result) =>
