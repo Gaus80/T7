@@ -41,7 +41,7 @@ function listar(){
     method: "GET",
     redirect: "follow"
   };
-  fetch("http://localhost:8888/.netlify/functions/estudiantes", requestOptions)
+  fetch("http://localhost:8888/.netlify/functions/estudiantes/estudiantes", requestOptions)
     .then((response) =>
       response.text())
     .then((result) =>
