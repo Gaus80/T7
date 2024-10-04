@@ -41,7 +41,7 @@ function listar(){
     method: "GET",
     redirect: "follow"
   };
-  fetch("http://localhost:8888/estudiantes", requestOptions)
+  fetch("http://localhost:8888/.netlify/functions/estudiantes", requestOptions)
     .then((response) =>
       response.text())
     .then((result) =>
@@ -61,8 +61,8 @@ function actualizar(){
   event.preventDefault();
 
   let raw = JSON.stringify({
-    "dni": document.getElementById("dniA").value,
-    "nombre": document.getElementById("nombreA").value,
+    "dni": document.getElementById("dni").value,
+    "nombre": document.getElementById("nombre").value,
   });
 
   let requestOptions = {
@@ -71,8 +71,8 @@ function actualizar(){
     body: raw,
     redirect: "follow"
   };
-  let elid=document.getElementById("idA").value;
-  fetch("http://localhost:8888/estudiantes/.netlify/functions/estudiantes"+elid, requestOptions)
+  let elid=document.getElementById("dni").value;
+  fetch("http://localhost:8888/.netlify/functions/estudiantes"+elid, requestOptions)
     .then((response) =>
           response.text())
     .then((result) =>
