@@ -260,11 +260,6 @@ function eliminarCurso(){
 }
 
 
-
-
-
-
-
 //GUARDAR SESIONES
 
 function guardarSesiones(){
@@ -291,5 +286,37 @@ function guardarSesiones(){
     .then((result) => console.log(result))
     .catch((error) => console.error(error));
 }
-// CONSULTAR CURSOS
+// LISTAR SESIONES
+function cargarSesion(resultado){
+  let transformado = JSON.parse(resultado);
+  var salida="";
+  var elemento="";
+
+  for (let vc in transformado){
+
+    //RESETEAR ELEMENTO
+    elemento = "";
+
+      elemento += "<br>Codigo Curso: " + transformado[vc].codigodelcurso;
+      elemento += "<br>Nombre del Curso: " + transformado[vc].nombredelcurso;
+      salida += elemento + "<br><br>";
+  }
+  document.getElementById("curso-rta").innerHTML = salida;
+}
+
+function listarSesion(){
+  event.preventDefault();
+  const requestOptions = {
+    method: "GET",
+    redirect: "follow"
+  };
+  fetch("http://localhost:8888/.netlify/functions/sesiones", requestOptions)
+    .then((response) =>
+      response.text())
+    .then((result) =>
+      cargarCurso(result))
+    .catch((error) =>
+      console.error(error));
+
+}
 
