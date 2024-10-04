@@ -12,7 +12,7 @@ app.get("/", (req, res) => {
     res.send("Hola mundo");
 });
 
-app.use("/", estudiantesroutes);
+app.use("/estudiantes", estudiantesroutes);
 
     const port = process.env.PORT || 6500;
     app.listen(port, () => {
