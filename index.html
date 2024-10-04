@@ -28,16 +28,16 @@
     <h1>Adicionar Curso</h1>
     <div>
         <form id="cursos">
-            <label for="adicionarCurso">Codigo del Curso:</label><br>
-            <input type=" text" id="adicionarCurso" placeholder=""><br><br>
+            <label for="codigoCurso">Codigo del Curso:</label><br>
+            <input type=" text" id="codigoCurso" placeholder=""><br><br>
             <label for="nombreCurso">Nombre del curso:</label><br>
             <input type="text" id="nombreCurso" placeholder=""><br><br>
             <!BOTON ACEPTAR EN ADICIONAR CURSO-->
-                <input type="submit" onclick="guardar()" id="btn-cursos" value="Enviar">
-                <input type="submit" onclick="listar()" id="btn-cursos" value="Listar">
+                <input type="submit" onclick="guardarCurso()" id="btn-cursos" value="Enviar">
+                <input type="submit" onclick="listarCurso()" id="btn-cursos" value="Listar">
                 <input type="submit" onclick="guardar()" id="btn-cursos" value="Actualizar">
                 <input type="submit" onclick="guardar()" id="btn-cursos" value="Eliminar">
-                
+                <p id="curso-rta"></p>
 
         </form>
     </div>
@@ -45,13 +45,23 @@
     <h1>Sesiones</h1>
     <div>
         <form id="sesiones">
-           
-            <label for="idhi">Hora de Inicio:</label><br>
-            <input type="text" id="idhi" placeHolder=""><br><br>
-            <label for="dnihf">Hora Final:</label><br>
-            <input type="text" id="dnihf" placeHolder=""> <br> <br>
+            <label for="sesionesCurso">Codigo del Curso</label><br>
+            <input type="text" id="sesionesCurso" placeHolder=""><br><br>
+
+            <label for="fecha">Fecha</label><br>
+            <input type="date" id="fecha" placeHolder=""><br><br>
+
+            <label for="horaInicio">Hora de Inicio:</label><br>
+            <input type="text" id="horaInicio" placeHolder=""><br><br>
+            <label for="horaFinal">Hora Final:</label><br>
+            <input type="text" id="horaFinal" placeHolder=""> <br> <br>
             <!BOTON ACEPTAR EN GENERAL-->
-                <input type="submit" onclick="guardar()" id="btn-sesiones" value="Enviar">
+                <input type="submit" onclick="guardarSesiones()" id="btn-sesiones" value="Enviar">
+                <input type="submit" onclick="listarCurso()" id="btn-cursos" value="Listar">
+                <input type="submit" onclick="guardar()" id="btn-cursos" value="Actualizar">
+                <input type="submit" onclick="guardar()" id="btn-cursos" value="Eliminar">
+                <p id="curso-rta"></p>
+
         </form>
     </div>
 

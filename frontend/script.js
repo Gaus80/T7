@@ -137,3 +137,66 @@ function eliminar_estudiante(){
     .catch((error) =>
       console.error(error));
 }
+
+//METODOS PARA CURSOS
+
+//GUARDAR SESIONES
+
+function guardarSesiones(){
+  const myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+  event.preventDefault();
+
+  let rawCursos = JSON.stringify({
+    "sesionesCurso": document.getElementById("sesionesCurso").value,
+    "fecha": document.getElementById("fecha").value,
+    "horaInicio": document.getElementById("horaInicio"),
+    "horaFinal": document.getElementById("horaFinal")
+  });
+
+  let requestOptions = {
+    method: "POST",
+    headers: myHeaders,
+    body: rawCursos,
+    redirect: "follow"
+  };
+
+  fetch("http://localhost:8888/.netlify/functions/sesiones", requestOptions)
+    .then((response) => response.text())
+    .then((result) => console.log(result))
+    .catch((error) => console.error(error));
+}
+// CONSULTAR CURSOS
+
+function cargarCurso  (resultado){
+  let transformado = JSON.parse(resultado);
+  var salida="";
+  var elemento="";
+
+  for (let vc in transformado){
+
+    //RESETEAR ELEMENTO
+    elemento = "";
+
+      elemento = elemento + "<br>Codigo Curso: " + transformado[vc].codigodelcurso;
+      elemento = elemento + "<br>Nombre del Curso: " + transformado[vc].nombredelcurso;
+      salida += elemento + "<br><br>";
+  }
+  document.getElementById("rta-curso").innerHTML = salida;
+}
+
+function listarCurso(){
+  event.preventDefault();
+  const requestOptions = {
+    method: "GET",
+    redirect: "follow"
+  };
+  fetch("http://localhost:8888/.netlify/functions/cursos", requestOptions)
+    .then((response) =>
+      response.text())
+    .then((result) =>
+      cargar(result))
+    .catch((error) =>
+      console.error(error));
+
+}
