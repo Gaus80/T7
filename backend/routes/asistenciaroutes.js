@@ -5,9 +5,9 @@ const asistenciacontrollers = require("../controllers/asistenciacontrollers.js")
 router.get("/",asistenciacontrollers.consultar);
 router.post("/",asistenciacontrollers.ingresar);
 
-//  router.route("/:codigodelcurso")
-//  .get(sesionescontrollers.consultarDetalle)
-//  .put(sesionescontrollers.actualizar)
-//  .delete(sesionescontrollers.borrar);
+ router.route("/:numerodedocumentodelestudiante")
+ .get(asistenciacontrollers.consultarDetalle)
+ .put(asistenciacontrollers.actualizar)
+ .delete(asistenciacontrollers.borrar);
 
 module.exports = router;

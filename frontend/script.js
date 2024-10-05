@@ -533,3 +533,38 @@ function listarAsistencia(){
       console.error(error));
 
 }
+
+//ACTUALIZAR
+
+function respuestaAsistencia(resultado){
+  document.getElementById("asistencia-rta").innerHTML = resultado;
+}
+
+
+function actualizarAsistencia(){
+  const myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+  event.preventDefault();
+
+  let raw = JSON.stringify({   
+    "numerodesesion": document.getElementById("numerodesesion").value,
+    "multadeasistencia": document.getElementById("multadeasistencia").value,
+    "multadenorma": document.getElementById("multadenorma").value,
+  });
+
+  let requestOptions = {
+    method: "PUT",
+    headers: myHeaders,
+    body: raw,
+    redirect: "follow"
+  };
+  let cod = document.getElementById("documentoEstudiante").value;
+  fetch(`http://localhost:8888/.netlify/functions/asistencias/${cod}`, requestOptions)
+    .then((response) =>
+          response.text())
+    .then((result) =>
+          respuestaAsistencia(result))
+    .catch((error) =>
+          console.error(error));
+}
+

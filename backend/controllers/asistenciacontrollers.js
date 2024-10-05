@@ -48,10 +48,10 @@ class AsistenciasController{
     actualizar(req, res) {
         const { numerodedocumentodelestudiante } = req.params; 
         try {
-            const { nombre } = req.body;  
+            const { numerodesesion, multadenorma, multadeasistencia } = req.body;  
             db.query(
-                'UPDATE sistema_asistencia.estudiantes SET nombrescompletosdelestudiante=? WHERE numerodedocumentodelestudiante=?',
-                [nombre, numerodedocumentodelestudiante],  
+                'UPDATE sistema_asistencia.asistencias SET numerodesesion=?, multadeasistencia=?,  multadenorma=? WHERE numerodedocumentodelestudiante=?',
+                [numerodesesion, multadenorma, multadeasistencia,numerodedocumentodelestudiante],  
                 (err, rows) => {
                     if (err) {
                         res.status(400).send(err.message);
