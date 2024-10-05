@@ -44,13 +44,13 @@ ingresar(req,res){
 }
 
 actualizar(req, res) {
-    const { codigodelcurso } = req.params;  // Get 'codigodelcurso' from URL
+    const { codigodelcurso } = req.params; 
     try {
-        const { fecha, horaInicio, horaFinal } = req.body;  // Get updated data from request body
+        const { fecha, horaInicio, horaFinal } = req.body;  
 
         db.query(
             'UPDATE sistema_asistencia.sesiones SET fecha=?, horadeinicio=?, horafinal=? WHERE codigodelcurso=?',
-            [fecha, horaInicio, horaFinal, codigodelcurso],  // Use 'codigodelcurso' only in WHERE clause
+            [fecha, horaInicio, horaFinal, codigodelcurso],  
             (err, rows) => {
                 if (err) {
                     res.status(400).send(err.message);
