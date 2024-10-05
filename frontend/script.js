@@ -378,31 +378,35 @@ function respuestaSesion(resultado){
   document.getElementById("sesion-rta").innerHTML = resultado;
 }
 
-function actualizarSesion(event){  
-  event.preventDefault();  
 
+function actualizarSesion(){
   const myHeaders = new Headers();
   myHeaders.append("Content-Type", "application/json");
+  event.preventDefault();
 
-  let raw = JSON.stringify({  
+  let raw = JSON.stringify({   
     "fecha": document.getElementById("fecha").value,
     "horaInicio": document.getElementById("horaInicio").value,
     "horaFinal": document.getElementById("horaFinal").value,
   });
 
-  let requestOptions = {  
+  let requestOptions = {
     method: "PUT",
     headers: myHeaders,
     body: raw,
     redirect: "follow"
   };
-
-  let codigo = document.getElementById("sesionesCurso").value;
-  fetch(`http://localhost:8888/.netlify/functions/sesiones/${codigo}`, requestOptions)
-    .then((response) => response.text())
-    .then((result) => respuestaSesion(result))  // Corrected function name
-    .catch((error) => console.error(error));
+  let cod = document.getElementById("sesionesCurso").value;
+  fetch(`http://localhost:8888/.netlify/functions/sesiones/${cod}`, requestOptions)
+    .then((response) =>
+          response.text())
+    .then((result) =>
+          respuestaSesion(result))
+    .catch((error) =>
+          console.error(error));
 }
+
+
 
 //ELIMINAR SESION
 

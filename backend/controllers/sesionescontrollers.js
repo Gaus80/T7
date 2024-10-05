@@ -49,7 +49,7 @@ actualizar(req, res) {
         const { fecha, horaInicio, horaFinal } = req.body;  
 
         db.query(
-            'UPDATE sistema_asistencia.sesiones SET fecha=?, horadeinicio=?, horafinal=? WHERE codigodelcurso=?',
+           'UPDATE sistema_asistencia.sesiones SET fecha=?, horadeinicio=?, horafinal=? WHERE codigodelcurso=?',
             [fecha, horaInicio, horaFinal, codigodelcurso],  
             (err, rows) => {
                 if (err) {

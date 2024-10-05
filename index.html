@@ -67,6 +67,35 @@
         </form>
     </div>
 
+    <h1>Asistencias</h1>
+    <div>
+        <form id="asistencias-form">
+            <label for="numerodesecuencia">Número de secuencia:</label><br>
+            <input type="text" id="numerodesecuencia" placeholder=""><br><br>
+    
+            <label for="numerodesesion">Número de sesión:</label><br>
+            <input type="text" id="numerodesesion" placeholder=""><br><br>
+    
+            <label for="numerodedocumentodelestudiante">Número de documento del estudiante:</label><br>
+            <input type="text" id="numerodedocumentodelestudiante" placeholder=""><br><br>
+    
+            <label for="multadeasistencia">Multa de asistencia:</label><br>
+            <input type="text" id="multadeasistencia" placeholder=""><br><br>
+    
+            <label for="multadenorma">Multa de norma:</label><br>
+            <input type="text" id="multadenorma" placeholder=""><br><br>
+    
+            <!-- Botones de acción -->
+            <button type="button" onclick="guardarAsistencia()">Enviar</button>
+            <button type="button" onclick="listarAsistencias()">Listar</button>
+            <button type="button" onclick="actualizarAsistencia()">Actualizar</button>
+            <button type="button" onclick="eliminarAsistencia()">Eliminar</button>
+            <button type="button" onclick="listarAsistencia()">Listar Asistencia</button>
+    
+            <p id="asistencia-rta"></p>
+        </form>
+    </div>
+
     <script type="text/javascript" src="./frontend/script.js"></script>
 </body>
 </html>
