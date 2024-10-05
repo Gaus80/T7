@@ -482,7 +482,7 @@ function guardarAsistencia(){
   let rawCursos = JSON.stringify({
     "numerodesesion": document.getElementById("numerodesesion").value,
     "documentoEstudiante": document.getElementById("documentoEstudiante").value,
-    "multa de asistencia": document.getElementById("multadeasistencia").value,
+    "multadeasistencia": document.getElementById("multadeasistencia").value,
     "multadenorma": document.getElementById("multadenorma").value,
   });
 
@@ -511,8 +511,8 @@ function cargarAsistencia(resultado){
 
       elemento += "<br>Curso: " + transformado[vc].numerodesesion;
       elemento += "<br>Documento Estudiante: " + transformado[vc].numerodedocumentodelestudiante;
-      elemento += "<br>Multa de Asistencia: " + transformado[vc]. multadeasistencia;
-      elemento += "<br>Multa de Norma: " + transformado[vc].  multadenorma;
+      elemento += "<br>Multa de Asistencia: " + transformado[vc].multadeasistencia;
+      elemento += "<br>Multa de Norma: " + transformado[vc].multadenorma;
       salida += elemento + "<br><br>";
   }
   document.getElementById("asistencia-rta").innerHTML = salida;
