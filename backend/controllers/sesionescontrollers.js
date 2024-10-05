@@ -86,13 +86,13 @@ borrar(req,res){
 }
 
 
-
 consultarDetalle(req,res){
-    const {numerodedocumentodelestudiante} = req.params;
+    const {codigodelcurso} = req.params;
     try{
 
-        db.query('SELECT  * FROM estudiantes WHERE numerodedocumentodelestudiante=?',
-        [numerodedocumentodelestudiante],(err,rows) => {
+        db.query('SELECT  * FROM sesiones WHERE codigodelcurso=?',
+        [ codigodelcurso ],(err,rows) => {
+
             if(err) {
                 res.status (400).send(err.message);
             }

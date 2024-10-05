@@ -299,7 +299,7 @@ function listar_curso(event) {
       }
       return response.text();
     })
-    .then((result) => cargarLECursos(result)) // Llamar a la función que carga el resultado
+    .then((result) => cargarLECursos(result)) 
     .catch((error) => {
       console.error(error);
       document.getElementById("curso-rta").innerHTML = "Error: " + error.message;
@@ -430,3 +430,53 @@ function eliminarSesion(){
     .catch((error) =>
       console.error(error));
 }
+
+
+///LISTAR UNA SOLA SESION
+
+function cargarUnicaSesion(resultado){
+  let transformado = JSON.parse(resultado);
+  var salida="";
+  var elemento="";
+  elemento = elemento + "<br>Codigo del Curso: " + transformado.codigodelcurso;
+  elemento = elemento + "<br>Fecha: " + transformado.fecha;
+  elemento = elemento + "<br>Hora de inicio: " + transformado.horadeinicio;
+  elemento = elemento + "<br>Fecha: " + transformado.horafinal;
+  salida += elemento + "<br><br>";
+  document.getElementById("sesion-rta").innerHTML = salida;
+}
+
+//LISTAR UNA SOLA SESION
+function listarUnicaSesion(){
+  const myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+  event.preventDefault();
+
+  const requestOptions = {
+    method: "GET",
+    headers: myHeaders,
+    redirect: "follow"
+  };
+  let codigo = document.getElementById("sesionesCurso").value;
+  fetch(`http://localhost:8888/.netlify/functions/sesiones/${codigo}`, requestOptions)
+  .then((response) => {
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    // Check if the response is empty
+    return response.text().then(text => text ? JSON.parse(text) : {});
+  })
+  .then((result) => {
+    if (Object.keys(result).length === 0) {
+      throw new Error("No session data found or session does not exist.");
+    }
+    cargarUnicaSesion(result);
+  })
+  .catch((error) => {
+    console.error('Error:', error.message);  // Log the error message
+    document.getElementById("session-details").innerHTML = `<p>Error: ${error.message}</p>`;
+  });
+
+}
+
+
