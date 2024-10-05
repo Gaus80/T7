@@ -568,3 +568,63 @@ function actualizarAsistencia(){
           console.error(error));
 }
 
+//BORRAR ASISTENCIA
+
+function cargarAsistenciaEliminada(resultado){
+  let transformado = JSON.parse(resultado);
+  document.getElementById("asistencia-rta").innerHTML = transformado.respuesta;
+}
+
+function eliminarAsistencia(){
+  const myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+  event.preventDefault();
+
+  const requestOptions = {
+    method: "DELETE",
+    headers: myHeaders,
+    redirect: "follow"
+  };
+  let codigo = document.getElementById("documentoEstudiante").value;
+  fetch(`http://localhost:8888/.netlify/functions/asistencias/${codigo}`, requestOptions)
+    .then((response) =>
+      response.text())
+    .then((result) =>
+      cargarAsistenciaEliminada(result))
+    .catch((error) =>
+      console.error(error));
+}
+
+///LISTAR UNA SOLA ASISTENCIA
+
+function cargarUnicaAsistencia(resultado){
+  let transformado = JSON.parse(resultado);
+  var salida="";
+  var elemento="";
+     elemento += "<br>Curso: " + transformado.numerodesesion;
+      elemento += "<br>Documento Estudiante: " + transformado.numerodedocumentodelestudiante;
+      elemento += "<br>Multa de Asistencia: " + transformado.multadeasistencia;
+      elemento += "<br>Multa de Norma: " + transformado.multadenorma;
+  salida += elemento + "<br><br>";
+  document.getElementById("asistencia-rta").innerHTML = salida;
+}
+
+function listarUnicaAsistencia(){
+  const myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+  event.preventDefault();
+
+  const requestOptions = {
+    method: "GET",
+    headers: myHeaders,
+    redirect: "follow"
+  };
+  let cod = document.getElementById("documentoEstudiante").value;
+  fetch(`http://localhost:8888/.netlify/functions/asistencias/${cod}`, requestOptions)
+    .then((response) =>
+      response.text())
+    .then((result) =>
+      cargarUnicaAsistencia(result))
+    .catch((error) =>
+      console.error(error));
+}

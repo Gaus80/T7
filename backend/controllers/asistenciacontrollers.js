@@ -48,10 +48,10 @@ class AsistenciasController{
     actualizar(req, res) {
         const { numerodedocumentodelestudiante } = req.params; 
         try {
-            const { numerodesesion, multadenorma, multadeasistencia } = req.body;  
+            const { numerodesesion,  multadeasistencia, multadenorma, } = req.body;  
             db.query(
                 'UPDATE sistema_asistencia.asistencias SET numerodesesion=?, multadeasistencia=?,  multadenorma=? WHERE numerodedocumentodelestudiante=?',
-                [numerodesesion, multadenorma, multadeasistencia,numerodedocumentodelestudiante],  
+                [numerodesesion,multadeasistencia, multadenorma, numerodedocumentodelestudiante],  
                 (err, rows) => {
                     if (err) {
                         res.status(400).send(err.message);
@@ -74,7 +74,7 @@ class AsistenciasController{
         const {numerodedocumentodelestudiante} = req.params;
         try{
 
-            db.query('SELECT  * FROM estudiantes WHERE numerodedocumentodelestudiante=?',
+            db.query('SELECT * FROM asistencias WHERE numerodedocumentodelestudiante=?',
             [numerodedocumentodelestudiante],(err,rows) => {
                 if(err) {
                     res.status (400).send(err.message);
@@ -91,7 +91,7 @@ class AsistenciasController{
         const {numerodedocumentodelestudiante} = req.params;
         try{
             req.body;
-            db.query('DELETE FROM sistema_asistencia.estudiantes WHERE numerodedocumentodelestudiante=?;',
+            db.query('DELETE FROM sistema_asistencia.asistencias WHERE numerodedocumentodelestudiante=?;',
             [numerodedocumentodelestudiante],(err,rows) => {
                 if(err) {
                     res.status (400).send(err.message);
