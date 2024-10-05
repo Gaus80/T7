@@ -44,12 +44,13 @@ ingresar(req,res){
 }
 
 actualizar(req, res) {
-    const { codigoCurso } = req.params;  // Get codigoCurso from URL
+    const { codigodelcurso } = req.params;  // Get 'codigodelcurso' from URL
     try {
-        const { fecha, horaInicio, horaFinal } = req.body;  // Get body parameters
+        const { fecha, horaInicio, horaFinal } = req.body;  // Get updated data from request body
+
         db.query(
-            'UPDATE sistema_asistencia.sesiones SET codigodelcurso=?, fecha=?, horadeinicio=?, horafinal=? WHERE codigodelcurso=?',
-            [codigoCurso, fecha, horaInicio, horaFinal, codigoCurso],  // Pass codigoCurso again for the WHERE clause
+            'UPDATE sistema_asistencia.sesiones SET fecha=?, horadeinicio=?, horafinal=? WHERE codigodelcurso=?',
+            [fecha, horaInicio, horaFinal, codigodelcurso],  // Use 'codigodelcurso' only in WHERE clause
             (err, rows) => {
                 if (err) {
                     res.status(400).send(err.message);
@@ -66,6 +67,24 @@ actualizar(req, res) {
         res.status(500).send(err.message);
     }
 }
+
+borrar(req,res){
+    const { codigodelcurso } = req.params;
+    try{
+        req.body;
+        db.query('DELETE FROM sistema_asistencia.sesiones WHERE codigodelcurso=?;',
+        [codigodelcurso],(err,rows) => {
+            if(err) {
+                res.status (400).send(err.message);
+            }
+            if (rows.affectedRows == 1)
+                res.status(200).json({respuesta:"Registro borrado correctamente"});
+        });
+    }catch (err){
+        res.status(500).send(err.message);
+    }
+}
+
 
 
 consultarDetalle(req,res){
@@ -85,25 +104,9 @@ consultarDetalle(req,res){
 
 }
 
-borrar(req,res){
-    const {numerodedocumentodelestudiante} = req.params;
-    try{
-        req.body;
-        db.query('DELETE FROM sistema_asistencia.estudiantes WHERE numerodedocumentodelestudiante=?;',
-        [numerodedocumentodelestudiante],(err,rows) => {
-            if(err) {
-                res.status (400).send(err.message);
-            }
-            if (rows.affectedRows == 1)
-                res.status(200).json({respuesta:"Registro borrado correctamente"});
-        });
-    }catch (err){
-        res.status(500).send(err.message);
-    }
-}
+
 }
 
 
-}
 
 module.exports = new SesionesController();

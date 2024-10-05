@@ -21,15 +21,15 @@ class EstudiantesController{
     }
 
     actualizar(req, res) {
-        const { numerodedocumentodelestudiante } = req.params;  // Get dni from URL
+        const { numerodedocumentodelestudiante } = req.params; 
         try {
-            const { nombre } = req.body;  // Get new name from request body
+            const { nombre } = req.body;  
             db.query(
                 'UPDATE sistema_asistencia.estudiantes SET nombrescompletosdelestudiante=? WHERE numerodedocumentodelestudiante=?',
-                [nombre, numerodedocumentodelestudiante],  // Update the name where dni matches
+                [nombre, numerodedocumentodelestudiante],  
                 (err, rows) => {
                     if (err) {
-                        res.status(400).send(err.message);z
+                        res.status(400).send(err.message);
                         return;
                     }
                     if (rows.affectedRows == 1) {
@@ -64,6 +64,41 @@ class EstudiantesController{
             res.status(500).send(err.message);
         }
     }
+
+    consultarDetalle(req,res){
+        const {numerodedocumentodelestudiante} = req.params;
+        try{
+
+            db.query('SELECT  * FROM estudiantes WHERE numerodedocumentodelestudiante=?',
+            [numerodedocumentodelestudiante],(err,rows) => {
+                if(err) {
+                    res.status (400).send(err.message);
+                }
+                res.status(200).json(rows[0]);
+            });
+        }catch (err){
+            res.status(500).send(err.message);
+        }
+
+    }
+
+    borrar(req,res){
+        const {numerodedocumentodelestudiante} = req.params;
+        try{
+            req.body;
+            db.query('DELETE FROM sistema_asistencia.estudiantes WHERE numerodedocumentodelestudiante=?;',
+            [numerodedocumentodelestudiante],(err,rows) => {
+                if(err) {
+                    res.status (400).send(err.message);
+                }
+                if (rows.affectedRows == 1)
+                    res.status(200).json({respuesta:"Registro borrado correctamente"});
+            });
+        }catch (err){
+            res.status(500).send(err.message);
+        }
+   }
+
 
 }
 

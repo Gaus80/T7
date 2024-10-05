@@ -378,14 +378,13 @@ function respuestaSesion(resultado){
   document.getElementById("sesion-rta").innerHTML = resultado;
 }
 
-function actualizarSesion(event){  // Add event parameter here
-  event.preventDefault();  // Prevent form submission
+function actualizarSesion(event){  
+  event.preventDefault();  
 
   const myHeaders = new Headers();
   myHeaders.append("Content-Type", "application/json");
 
   let raw = JSON.stringify({  
-    "sesionesCurso": document.getElementById("sesionesCurso").value,
     "fecha": document.getElementById("fecha").value,
     "horaInicio": document.getElementById("horaInicio").value,
     "horaFinal": document.getElementById("horaFinal").value,
@@ -401,6 +400,33 @@ function actualizarSesion(event){  // Add event parameter here
   let codigo = document.getElementById("sesionesCurso").value;
   fetch(`http://localhost:8888/.netlify/functions/sesiones/${codigo}`, requestOptions)
     .then((response) => response.text())
-    .then((result) => respuestaActualizarSesion(result))  // Corrected function name
+    .then((result) => respuestaSesion(result))  // Corrected function name
     .catch((error) => console.error(error));
+}
+
+//ELIMINAR SESION
+
+function cargarSesionEliminada(resultado){
+  let transformado = JSON.parse(resultado);
+  document.getElementById("sesion-rta").innerHTML = transformado.respuesta;
+}
+
+function eliminarSesion(){
+  const myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+  event.preventDefault();
+
+  const requestOptions = {
+    method: "DELETE",
+    headers: myHeaders,
+    redirect: "follow"
+  };
+  let codigo = document.getElementById("sesionesCurso").value;
+  fetch(`http://localhost:8888/.netlify/functions/sesiones/${codigo}`, requestOptions)
+    .then((response) =>
+      response.text())
+    .then((result) =>
+      cargarSesionEliminada(result))
+    .catch((error) =>
+      console.error(error));
 }
