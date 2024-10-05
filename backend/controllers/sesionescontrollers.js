@@ -90,7 +90,7 @@ consultarDetalle(req,res){
     const {codigodelcurso} = req.params;
     try{
 
-        db.query('SELECT  * FROM sesiones WHERE codigodelcurso=?',
+        db.query('SELECT * FROM sesiones WHERE codigodelcurso=?',
         [ codigodelcurso ],(err,rows) => {
 
             if(err) {
