@@ -446,6 +446,16 @@ function cargarUnicaSesion(resultado){
   document.getElementById("sesion-rta").innerHTML = salida;
 }
 
+function cargarLE(resultado){
+  let transformado = JSON.parse(resultado);
+  var salida="";
+  var elemento="";
+  elemento = elemento + "<br>Documento de identidad: " + transformado.numerodedocumentodelestudiante;
+  elemento = elemento + "<br>Nombres: " + transformado.nombrescompletosdelestudiante;
+  salida += elemento + "<br><br>";
+  document.getElementById("rta").innerHTML = salida;
+}
+
 //LISTAR UNA SOLA SESION
 function listarUnicaSesion(){
   const myHeaders = new Headers();
