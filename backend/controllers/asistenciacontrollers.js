@@ -8,7 +8,7 @@ class AsistenciasController{
 
     consultar(req,res){
         try{
-            db.query('SELECT  * FROM estudiantes',
+            db.query('SELECT * FROM asistencias',
             [],(err,rows) => {
                 if(err) {
                     res.status (400).send(err.message);
@@ -19,6 +19,31 @@ class AsistenciasController{
             res.status(500).send(err.message);
         }
     }
+
+    ingresar(req,res){
+        try{
+            const myJSON = JSON.stringify(req.body);
+            console.log ("la información que llega es " + myJSON );
+
+            const {numerodesesion, documentoEstudiante, multadeasistencia,multadenorma} = req.body;
+            //console.log ("el dni que llega es de " + dni);
+
+            db.query('INSERT INTO asistencias (numerodesecuencia,numerodesesion ,numerodedocumentodelestudiante, multadeasistencia, multadenorma) VALUES (0,?, ?, ?, ?);',
+            [numerodesesion, documentoEstudiante, multadeasistencia,multadenorma],(err,rows) => {
+                if(err) {
+                    res.status (400).send(err.message);
+                }else{
+                    res.status(201).json({id: rows.insertId});
+                }
+            });
+
+        }catch (err){
+            res.status(500).send(err.message);
+        }
+    }
+
+
+
 
     actualizar(req, res) {
         const { numerodedocumentodelestudiante } = req.params; 
@@ -43,27 +68,7 @@ class AsistenciasController{
             res.status(500).send(err.message);
         }
     }
-    ingresar(req,res){
-        try{
-            const myJSON = JSON.stringify(req.body);
-            console.log ("la información que llega es " + myJSON );
-
-            const {dni,nombre} = req.body;
-            //console.log ("el dni que llega es de " + dni);
-
-            db.query('INSERT INTO estudiantes (numerodedocumentodelestudiante ,nombrescompletosdelestudiante) VALUES (?, ?);',
-            [dni,nombre],(err,rows) => {
-                if(err) {
-                    res.status (400).send(err.message);
-                }else{
-                    res.status(201).json({id: rows.insertId});
-                }
-            });
-
-        }catch (err){
-            res.status(500).send(err.message);
-        }
-    }
+   
 
     consultarDetalle(req,res){
         const {numerodedocumentodelestudiante} = req.params;

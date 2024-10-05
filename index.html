@@ -70,11 +70,14 @@
     <h1>Asistencias</h1>
     <div>
         <form id="asistencias-form">
+
+            <label for="documentoEstudiante">Número de documento del estudiante:</label><br>
+            <input type="text" id="documentoEstudiante" placeholder=""><br><br>
+
             <label for="numerodesesion">Número de sesión:</label><br>
             <input type="text" id="numerodesesion" placeholder=""><br><br>
     
-            <label for="documentoEstudiante">Número de documento del estudiante:</label><br>
-            <input type="text" id="documentoEstudiante" placeholder=""><br><br>
+            
     
             <label for="multadeasistencia">Multa de asistencia:</label><br>
             <input type="text" id="multadeasistencia" placeholder=""><br><br>
@@ -84,7 +87,7 @@
     
             <!-- Botones de acción -->
             <button type="button" onclick="guardarAsistencia()">Enviar</button>
-            <button type="button" onclick="listarAsistencias()">Listar</button>
+            <button type="button" onclick="listarAsistencia()">Listar</button>
             <button type="button" onclick="actualizarAsistencia()">Actualizar</button>
             <button type="button" onclick="eliminarAsistencia()">Eliminar</button>
             <button type="button" onclick="listarAsistencia()">Listar Asistencia</button>

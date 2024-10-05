@@ -471,3 +471,65 @@ function listarUnicaSesion(){
       console.error(error));
 }
 
+//ASISTENCIAS
+
+//GUARDAR ASISTENCIAS
+function guardarAsistencia(){
+  const myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+  event.preventDefault();
+
+  let rawCursos = JSON.stringify({
+    "numerodesesion": document.getElementById("numerodesesion").value,
+    "documentoEstudiante": document.getElementById("documentoEstudiante").value,
+    "multa de asistencia": document.getElementById("multadeasistencia").value,
+    "multadenorma": document.getElementById("multadenorma").value,
+  });
+
+  let requestOptions = {
+    method: "POST",
+    headers: myHeaders,
+    body: rawCursos,
+    redirect: "follow"
+  };
+
+  fetch("http://localhost:8888/.netlify/functions/asistencias", requestOptions)
+    .then((response) => response.text())
+    .then((result) => console.log(result))
+    .catch((error) => console.error(error));
+}
+// LISTAR ASISTENCIAS
+function cargarAsistencia(resultado){
+  let transformado = JSON.parse(resultado);
+  var salida="";
+  var elemento="";
+
+  for (let vc in transformado){
+
+    //RESETEAR ELEMENTO
+    elemento = "";
+
+      elemento += "<br>Curso: " + transformado[vc].numerodesesion;
+      elemento += "<br>Documento Estudiante: " + transformado[vc].numerodedocumentodelestudiante;
+      elemento += "<br>Multa de Asistencia: " + transformado[vc]. multadeasistencia;
+      elemento += "<br>Multa de Norma: " + transformado[vc].  multadenorma;
+      salida += elemento + "<br><br>";
+  }
+  document.getElementById("asistencia-rta").innerHTML = salida;
+}
+
+function listarAsistencia(){
+  event.preventDefault();
+  const requestOptions = {
+    method: "GET",
+    redirect: "follow"
+  };
+  fetch("http://localhost:8888/.netlify/functions/asistencias", requestOptions)
+    .then((response) =>
+      response.text())
+    .then((result) =>
+      cargarAsistencia(result))
+    .catch((error) =>
+      console.error(error));
+
+}
